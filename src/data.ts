@@ -37,7 +37,7 @@ export const QUESTS = [
     status: 'active' as const,
     type: 'Main Quest',
     tagline: 'A multi-agent AI hub',
-    stack: ['TypeScript', 'React', 'Vite', 'Groq', 'Node', 'Expo'],
+    stack: ['TypeScript', 'React', 'Vite', 'Groq', 'Node'],
     githubUrl: 'https://github.com/Darryll2022/nexus-hub',
     liveUrl: null as string | null,
     // Level 2 flag — set to true when Nexus Hub is deployed publicly
@@ -75,8 +75,8 @@ export const QUESTS = [
         text: `I added Atlas, a code review agent that automatically scans my GitHub pull requests. Hooked it up to Groq's LLM API, built a deduplication system so it never reviews the same PR twice, and let it loose on my repos.`,
       },
       {
-        title: 'Phase 3 — The Monorepo',
-        text: `The web version wasn't enough. I restructured the whole thing into a monorepo — shared TypeScript core, React for web, Expo for mobile. Same agents, same logic, different canvas. The journey continues.`,
+        title: "What's Next",
+        text: `The foundation is solid. Next up: deeper agent orchestration, letting agents hand off tasks to each other, and a proper deployment so anyone can spin up their own Nexus Hub. The hub keeps growing.`,
       },
     ],
   },
