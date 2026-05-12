@@ -16,7 +16,7 @@ function HomeGate() {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/portfolio">
       <Stars />
       <Routes>
         <Route path="/" element={<HomeGate />} />
