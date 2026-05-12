@@ -21,6 +21,14 @@ export const CHARACTER = {
   ],
 };
 
+export interface Feature {
+  icon: string;
+  title: string;
+  desc: string;
+  color: string;
+  detail: string;
+}
+
 export const QUESTS = [
   {
     id: 'nexus-hub',
@@ -29,12 +37,30 @@ export const QUESTS = [
     status: 'active' as const,
     type: 'Main Quest',
     tagline: 'A multi-agent AI hub',
-    stack: ['TypeScript', 'React', 'Vite', 'Expo', 'Groq', 'Node'],
+    stack: ['TypeScript', 'React', 'Vite', 'Groq', 'Node', 'Expo'],
     githubUrl: 'https://github.com/Darryll2022/nexus-hub',
-    liveUrl: null,
+    liveUrl: null as string | null,
+    // Level 2 flag — set to true when Nexus Hub is deployed publicly
+    demoReady: false,
     icon: '🤖',
     color: '#34D399',
     glow: 'rgba(52,211,153,0.3)',
+    features: [
+      {
+        icon: '🧠',
+        title: 'Multi-Agent Chat',
+        color: '#34D399',
+        desc: 'Switch between AI specialists mid-conversation.',
+        detail: 'Each agent has its own system prompt, personality, and expertise. Built-in agents ship with Nexus Hub — but you can define your own. Name it, describe its role, give it a focus. The agent creator turns anyone into an AI architect.',
+      },
+      {
+        icon: '🔍',
+        title: 'Atlas PR Reviewer',
+        color: '#4d8bff',
+        desc: 'Automated GitHub PR reviews powered by Groq.',
+        detail: 'Atlas connects to your GitHub repositories and reviews every pull request. Structured output covers correctness, performance, security, and SOLID principles. It never reviews the same PR twice — a deduplication system tracks every review it has posted.',
+      },
+    ] as Feature[],
     chapters: [
       {
         title: 'The Spark',
@@ -49,7 +75,7 @@ export const QUESTS = [
         text: `I added Atlas, a code review agent that automatically scans my GitHub pull requests. Hooked it up to Groq's LLM API, built a deduplication system so it never reviews the same PR twice, and let it loose on my repos.`,
       },
       {
-        title: 'Phase 3 — Going Mobile',
+        title: 'Phase 3 — The Monorepo',
         text: `The web version wasn't enough. I restructured the whole thing into a monorepo — shared TypeScript core, React for web, Expo for mobile. Same agents, same logic, different canvas. The journey continues.`,
       },
     ],
@@ -63,10 +89,12 @@ export const QUESTS = [
     tagline: 'A canvas-based 2D fighter',
     stack: ['JavaScript', 'HTML5 Canvas', 'CSS'],
     githubUrl: 'https://github.com/Darryll2022/fighting-game',
-    liveUrl: null,
+    liveUrl: null as string | null,
+    demoReady: false,
     icon: '⚔️',
     color: '#F59E0B',
     glow: 'rgba(245,158,11,0.3)',
+    features: [] as Feature[],
     chapters: [
       {
         title: 'Enter the Arena',
