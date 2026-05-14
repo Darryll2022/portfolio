@@ -39,9 +39,9 @@ export const QUESTS = [
     tagline: 'A multi-agent AI hub',
     stack: ['TypeScript', 'React', 'Vite', 'Groq', 'Node'],
     githubUrl: 'https://github.com/Darryll2022/nexus-hub',
-    liveUrl: null as string | null,
+    liveUrl: 'https://nexus-hub-darryll2022-s-projects.vercel.app' as string | null,
     // Level 2 flag — set to true when Nexus Hub is deployed publicly
-    demoReady: false,
+    demoReady: true,
     icon: '🤖',
     color: '#34D399',
     glow: 'rgba(52,211,153,0.3)',
