@@ -81,6 +81,36 @@ export const QUESTS = [
     ],
   },
   {
+    id: 'neo-gaia',
+    name: 'Neo Gaia',
+    world: 'The Five Kingdoms',
+    status: 'active' as const,
+    type: 'Main Quest',
+    tagline: 'A JRPG open-world realm',
+    stack: ['TypeScript', 'React', 'SVG', 'CSS', 'Vite'],
+    githubUrl: 'https://github.com/Darryll2022/portfolio',
+    liveUrl: 'https://darryll2022.github.io/portfolio/quest/neo-gaia' as string | null,
+    demoReady: true,
+    icon: '🗺️',
+    color: '#F59E0B',
+    glow: 'rgba(245,158,11,0.3)',
+    features: [] as Feature[],
+    chapters: [
+      {
+        title: 'The World',
+        text: `Neo Gaia is a dark fantasy realm inspired by Singapore's geography. Five sovereign territories — The Crown Dominion, Ironwild Frontier, Verdant Bloom, Frostveil Barrens, and the Azure Coastlands — each scarred by war, myth, and ambition. And beneath them all, the hidden Southern Isles.`,
+      },
+      {
+        title: "Phase 1 — The Map Awakens",
+        text: `Phase 1 is a fully interactive SVG world map. Six regions, 24 named locations, tooltips, lore panels, region progress bars, a compass rose, a legend, and MRT crystal travel lines. All rendered in pure SVG and React — no game engine, no canvas.`,
+      },
+      {
+        title: "What's Coming",
+        text: `Phase 2 brings character movement and fog of war — regions reveal as you explore. Phase 3 introduces turn-based encounters, inventory, and persistent save state via localStorage. The age of reckoning is coming.`,
+      },
+    ],
+  },
+  {
     id: 'fighting-game',
     name: 'The Fighting Game',
     world: 'The Arena',

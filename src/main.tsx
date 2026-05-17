@@ -6,6 +6,7 @@ import WorldMap from './pages/WorldMap';
 import CharacterScreen from './pages/CharacterScreen';
 import QuestPage from './pages/QuestPage';
 import MidgarPage from './pages/MidgarPage';
+import NeoGaiaQuest from './pages/NeoGaiaQuest';
 import './styles/global.css';
 
 // Gate the hidden world via ?world=darkness
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<HomeGate />} />
         <Route path="/character" element={<CharacterScreen />} />
+        <Route path="/quest/neo-gaia" element={<NeoGaiaQuest />} />
         <Route path="/quest/:id" element={<QuestPage />} />
         <Route path="*" element={<WorldMap />} />
       </Routes>
