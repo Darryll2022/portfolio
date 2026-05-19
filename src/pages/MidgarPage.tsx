@@ -4,12 +4,22 @@
  * Locked message shown until dark mode ships.
  * When dark mode arrives: fill in the CI/CD content below.
  */
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const UNLOCKED = false; // flip to true when dark mode ships
 
 export default function MidgarPage() {
   const navigate = useNavigate();
+
+  // Prevent search engines from indexing the hidden easter egg route
+  useEffect(() => {
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex, nofollow';
+    document.head.appendChild(meta);
+    return () => { document.head.removeChild(meta); };
+  }, []);
 
   return (
     <div style={{
