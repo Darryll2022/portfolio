@@ -7,6 +7,7 @@
  *   - Set quest.liveUrl to the deployed URL
  *   - The CTA section will show the launch button
  */
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { QUESTS, Feature } from '../data';
@@ -463,36 +464,165 @@ function StackPill({ name, color }: { name: string; color: string }) {
   );
 }
 
-/* ─── Level 2 CTA ─── */
+/* ─── Level 2 CTA — BYOK Launcher ─── */
 function DemoCTA({ demoReady, liveUrl, color }: {
   demoReady: boolean;
   liveUrl: string | null;
   color: string;
 }) {
-  if (demoReady && liveUrl) {
+  const [apiKey, setApiKey] = React.useState('');
+  const [showKey, setShowKey] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
+
+  const launch = () => {
+    if (!liveUrl) return;
+    // Encode key into hash fragment — never hits server logs
+    const hash = apiKey.trim() ? `#orkey=${encodeURIComponent(apiKey.trim())}` : '';
+    window.open(liveUrl + hash, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') launch();
+  };
+
+  if (!demoReady || !liveUrl) {
     return (
-      <a href={liveUrl} target="_blank" rel="noreferrer" className="btn-kh">
-        LAUNCH NEXUS HUB ↗
-      </a>
+      <div style={{
+        display: 'inline-flex', alignItems: 'center', gap: 10,
+        padding: '11px 24px', borderRadius: 6,
+        border: `1px solid ${color}25`,
+        background: `${color}06`,
+        color: color + '99',
+        fontSize: '0.78rem', letterSpacing: '0.14em',
+        fontFamily: 'var(--font-title)',
+      }}>
+        <span style={{
+          width: 7, height: 7, borderRadius: '50%',
+          background: color, opacity: 0.45,
+          animation: 'pulse-glow 2s ease-in-out infinite',
+          display: 'inline-block', flexShrink: 0,
+        }} />
+        LIVE DEMO — COMING SOON
+      </div>
     );
   }
+
   return (
     <div style={{
-      display: 'inline-flex', alignItems: 'center', gap: 10,
-      padding: '11px 24px', borderRadius: 6,
+      background: `${color}08`,
       border: `1px solid ${color}25`,
-      background: `${color}06`,
-      color: color + '99',
-      fontSize: '0.78rem', letterSpacing: '0.14em',
-      fontFamily: 'var(--font-title)',
+      borderRadius: 10,
+      padding: '18px 20px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 12,
     }}>
-      <span style={{
-        width: 7, height: 7, borderRadius: '50%',
-        background: color, opacity: 0.45,
-        animation: 'pulse-glow 2s ease-in-out infinite',
-        display: 'inline-block', flexShrink: 0,
-      }} />
-      LIVE DEMO — COMING SOON
+      {/* Label */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: '0.95rem' }}>🔑</span>
+        <div>
+          <div style={{ fontSize: '0.72rem', fontWeight: 600, color, fontFamily: 'var(--font-title)', letterSpacing: '0.1em' }}>
+            BRING YOUR OWN KEY
+          </div>
+          <div style={{ fontSize: '0.65rem', color: '#6a7a9a', marginTop: 2 }}>
+            Paste your OpenRouter key — stored only in your browser
+          </div>
+        </div>
+      </div>
+
+      {/* Input row */}
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+        <div style={{ position: 'relative', flex: 1 }}>
+          <input
+            type={showKey ? 'text' : 'password'}
+            value={apiKey}
+            onChange={e => setApiKey(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="sk-or-v1-..."
+            style={{
+              width: '100%',
+              background: 'rgba(0,0,0,0.5)',
+              border: `1px solid ${apiKey ? color + '60' : 'rgba(80,80,120,0.3)'}`,
+              borderRadius: 6,
+              padding: '9px 36px 9px 12px',
+              color: '#e8eeff',
+              fontSize: '0.78rem',
+              fontFamily: 'monospace',
+              outline: 'none',
+              transition: 'border-color 0.2s',
+              boxSizing: 'border-box',
+            }}
+          />
+          {/* Show/hide toggle */}
+          <button
+            type="button"
+            onClick={() => setShowKey(s => !s)}
+            style={{
+              position: 'absolute', right: 8, top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'none', border: 'none',
+              color: '#6a7a9a', cursor: 'pointer',
+              fontSize: '0.75rem', padding: '2px 4px',
+            }}
+          >
+            {showKey ? '🙈' : '👁'}
+          </button>
+        </div>
+
+        {/* Launch button */}
+        <button
+          onClick={launch}
+          style={{
+            padding: '9px 18px',
+            borderRadius: 6,
+            border: `1px solid ${color}60`,
+            background: `${color}18`,
+            color,
+            fontSize: '0.75rem',
+            fontFamily: 'var(--font-title)',
+            letterSpacing: '0.12em',
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+            transition: 'all 0.2s',
+            flexShrink: 0,
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLButtonElement).style.background = `${color}30`;
+            (e.currentTarget as HTMLButtonElement).style.boxShadow = `0 0 14px ${color}30`;
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLButtonElement).style.background = `${color}18`;
+            (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none';
+          }}
+        >
+          LAUNCH ↗
+        </button>
+      </div>
+
+      {/* Or just launch without key */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div style={{ flex: 1, height: 1, background: 'rgba(80,80,120,0.2)' }} />
+        <span style={{ fontSize: '0.6rem', color: '#4a5568' }}>or</span>
+        <div style={{ flex: 1, height: 1, background: 'rgba(80,80,120,0.2)' }} />
+      </div>
+      <a
+        href={liveUrl}
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          display: 'block',
+          textAlign: 'center',
+          fontSize: '0.68rem',
+          color: '#6a7a9a',
+          textDecoration: 'none',
+          letterSpacing: '0.08em',
+          transition: 'color 0.2s',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.color = color)}
+        onMouseLeave={e => (e.currentTarget.style.color = '#6a7a9a')}
+      >
+        Launch without key (use free models only)
+      </a>
     </div>
   );
 }
