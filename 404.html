@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Darryll — Portfolio</title>
+  <script>
+    // GitHub Pages SPA trick — redirect to index.html preserving the path
+    // Encodes path+query+hash into a sessionStorage value, then index.html picks it up
+    var l = window.location;
+    sessionStorage.redirect = l.href;
+    l.replace(l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + '/portfolio/');
+  </script>
+</head>
+</html>
