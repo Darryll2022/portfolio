@@ -32,6 +32,7 @@ export default function WorldMap() {
         </div>
         <button
           onClick={() => navigate('/character')}
+          aria-label="View character screen"
           style={{
             background: 'none', border: '1px solid rgba(77,139,255,0.3)',
             borderRadius: 8, padding: '8px 20px', color: 'var(--muted)',
@@ -71,15 +72,17 @@ export default function WorldMap() {
         {QUESTS.map((q, i) => {
           const isHovered = hovered === q.id;
           return (
-            <div
+            <button
               key={q.id}
               onMouseEnter={() => setHovered(q.id)}
               onMouseLeave={() => setHovered(null)}
               onClick={() => navigate(`/quest/${q.id}`)}
+              aria-label={`Open ${q.name} — ${q.type}, ${STATUS_LABEL[q.status]}`}
               style={{
-                cursor: 'pointer',
+                cursor: 'pointer', background: 'none', border: 'none',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20,
                 animation: `fadeInUp 0.6s ease ${i * 0.15 + 0.3}s both`,
+                padding: 0,
               }}
             >
               {/* Orb */}
@@ -130,7 +133,7 @@ export default function WorldMap() {
                   {STATUS_LABEL[q.status]}
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>

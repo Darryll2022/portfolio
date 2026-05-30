@@ -14,7 +14,7 @@ export default function CharacterScreen() {
 
       {/* Back */}
       <div style={{ padding: '24px 20px 0' }}>
-        <button onClick={() => navigate('/')} style={{
+        <button onClick={() => navigate('/')} aria-label="Return to World Map" style={{
           background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer',
           fontSize: '0.8rem', letterSpacing: '0.15em', display: 'flex', alignItems: 'center', gap: 8,
         }}>

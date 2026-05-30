@@ -94,7 +94,7 @@ export default function MidgarPage() {
         )}
 
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/')} aria-label="Return to World Map"
           style={{
             marginTop: 36, background: 'none', cursor: 'pointer',
             border: '1px solid rgba(80,200,80,0.25)', borderRadius: 6,

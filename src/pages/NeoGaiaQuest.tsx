@@ -290,6 +290,10 @@ export const NeoGaiaQuest = () => {
                   onMouseEnter={() => setHoveredLoc(loc.id)}
                   onMouseLeave={() => setHoveredLoc(null)}
                   onClick={() => handleLocClick(loc)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleLocClick(loc)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Select location: ${loc.name}`}
                 >
                   {/* Pulse ring */}
                   {(isHovered || isSelected) && !isHidden && (
@@ -377,6 +381,10 @@ export const NeoGaiaQuest = () => {
                   key={region.id}
                   style={S.regionCard(region, activeRegion === region.id)}
                   onClick={() => handleRegionClick(region.id)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleRegionClick(region.id)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Select region: ${region.name}`}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: '0.9rem' }}>{region.icon}</span>

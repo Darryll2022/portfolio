@@ -132,6 +132,8 @@ function AbilityCard({ feature, index }: { feature: Feature; index: number }) {
     <Reveal delay={index * 150}>
       <div
         onClick={() => setExpanded(v => !v)}
+        aria-expanded={expanded}
+        aria-label="Toggle section details"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
@@ -301,6 +303,10 @@ function BrowserMockup({ color }: { color: string }) {
             <div
               key={a.name}
               onClick={() => setActiveAgent(i)}
+              onKeyDown={(e) => e.key === 'Enter' && setActiveAgent(i)}
+              role="button"
+              tabIndex={0}
+              aria-pressed={activeAgent === i}
               style={{
                 display: 'flex', alignItems: 'center', gap: 10,
                 padding: '10px 14px', cursor: 'pointer',
